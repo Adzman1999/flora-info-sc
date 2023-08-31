@@ -80,15 +80,7 @@ const Login = () => {
           background: "transparent",
           height: "100vh",
         }}>
-        <Box sx={{ position: "absolute", right: 2, top: 2 }}>
-          <Tooltip title='Open to show a given credential'>
-            <IconButton onClick={handleOpen}>
-              <KeyRounded />
-            </IconButton>
-          </Tooltip>
-        </Box>
-
-        <ModalComponent open={open} mdWidth={100}>
+        <ModalComponent open={open}>
           <Stack direction='row-reverse'>
             <IconButton onClick={handleClose}>
               <closeRounded />
@@ -110,20 +102,27 @@ const Login = () => {
         </ModalComponent>
 
         <Card
+          elevation={0}
           component='form'
           onSubmit={loginSubmit}
           sx={{
-            position: "relative",
             width: { xs: "100%", md: 500 },
             background: "transparent",
           }}>
           <Card
             className='sub-bg'
             sx={{
-              boxShadow: 0,
+              position: "relative",
               p: 5,
               m: 2,
             }}>
+            <Box sx={{ position: "absolute", right: 2, top: 2 }}>
+              <Tooltip title='Open to show a given credential'>
+                <IconButton onClick={handleOpen}>
+                  <KeyRounded />
+                </IconButton>
+              </Tooltip>
+            </Box>
             <Stack justifyContent='center' alignItems='center'>
               <img
                 src={FloraLogo}
