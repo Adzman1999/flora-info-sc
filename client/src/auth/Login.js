@@ -93,9 +93,11 @@ const Login = () => {
                 name='username'
                 id='username'
                 autoComplete='username'
+                value='admin'
                 onChange={(e) => setUsername(e.target.value)}
               />
               <TextField
+                value='admin'
                 required
                 label='Password'
                 type='password'

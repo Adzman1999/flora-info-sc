@@ -4,6 +4,7 @@ import ModalComponent from "../../../../components/ModalComponent";
 import {
   Autocomplete,
   Button,
+  LoadingButton,
   Card,
   Divider,
   FormControl,
@@ -95,6 +96,8 @@ const FloraInfoFormModal = () => {
 
   const [snackbarError, setSnackBarError] = useState(false);
 
+  const [loading, setLoading] = useState(false);
+
   const handleSnackbarOpenSuccess = () => {
     setSnackBarSuccess(true);
   };
@@ -142,6 +145,7 @@ const FloraInfoFormModal = () => {
   const handleCreateFloraInfo = (e) => {
     e.preventDefault();
     createNewFlora(
+      setLoading,
       english,
       leafKind,
       floraType,
@@ -605,88 +609,75 @@ const FloraInfoFormModal = () => {
               </Stack>
             </Stack>
 
-
             <Stack
               spacing={2}
               sx={{ display: nextOpen3 === true ? "block" : "none" }}>
+              <TextField
+                required
+                label='Flora Description'
+                multiline
+                fullWidth
+                rows={1.5}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+              <TextField
+                required
+                label='Leaf Description'
+                multiline
+                fullWidth
+                rows={1.5}
+                onChange={(e) => setLeafDescription(e.target.value)}
+              />
+              <TextField
+                label='Flower Description'
+                multiline
+                fullWidth
+                rows={1.5}
+                onChange={(e) => setFlowerDescription(e.target.value)}
+              />
+              <TextField
+                label='Fruit Description'
+                multiline
+                fullWidth
+                rows={1.5}
+                onChange={(e) => setFruitDescription(e.target.value)}
+              />
+              <Stack spacing={2} direction='row' alignItems='center'>
+                <FormControl sx={{ width: "100%" }} size='small'>
+                  <InputLabel id='select-host-type'>FLora Type</InputLabel>
+                  <Select
+                    required
+                    labelId='select-hos-type'
+                    id='select-hos-type'
+                    value={floraType}
+                    label='Hospitalization Plan'
+                    onChange={(e) => setFloraType(e.target.value)}>
+                    <MenuItem value='Actinomorphic'>Actinomorphic</MenuItem>
+                    <MenuItem value='Zygomorphic'>Zygomorphic</MenuItem>
+                    <MenuItem value='Asymmetrical'>Asymmetrical</MenuItem>
+                  </Select>
+                </FormControl>
+
                 <TextField
                   required
-                  label='Flora Description'
-                  multiline
+                  size='small'
+                  label='English Name'
                   fullWidth
-                  rows={1.5}
-                  onChange={(e) => setDescription(e.target.value)}
+                  onChange={(e) => setEnglish(e.target.value)}
                 />
                 <TextField
                   required
-                  label='Leaf Description'
-                  multiline
+                  size='small'
+                  label='Leaf Kind'
                   fullWidth
-                  rows={1.5}
-                  onChange={(e) => setLeafDescription(e.target.value)}
+                  onChange={(e) => setLeafKind(e.target.value)}
                 />
-                <TextField
-                  label='Flower Description'
-                  multiline
-                  fullWidth
-                  rows={1.5}
-                  onChange={(e) => setFlowerDescription(e.target.value)}
-                />
-                <TextField
-                  label='Fruit Description'
-                  multiline
-                  fullWidth
-                  rows={1.5}
-                  onChange={(e) => setFruitDescription(e.target.value)}
-                />
-                <Stack spacing={2} direction='row' alignItems='center'>
-                  <FormControl sx={{ width: "100%" }} size='small'>
-                    <InputLabel id='select-host-type'>
-                      FLora Type
-                    </InputLabel>
-                    <Select
-                      required
-                      labelId='select-hos-type'
-                      id='select-hos-type'
-                      value={floraType}
-                      label='Hospitalization Plan'
-                      onChange={(e) => setFloraType(e.target.value)}>
-                      <MenuItem
-                        value='Actinomorphic'>
-                        Actinomorphic
-                      </MenuItem>
-                      <MenuItem
-                        value='Zygomorphic'>
-                        Zygomorphic
-                      </MenuItem>
-                      <MenuItem
-                        value='Asymmetrical'>
-                        Asymmetrical
-                      </MenuItem>
-                    </Select>
-                    </FormControl>
-
-                    <TextField
-                      required
-                      size='small'
-                      label='English Name'
-                      fullWidth
-                      onChange={(e) => setEnglish(e.target.value)}
-                    />
-                    <TextField
-                      required
-                      size='small'
-                      label='Leaf Kind'
-                      fullWidth
-                      onChange={(e) => setLeafKind(e.target.value)}
-                    />
-                </Stack>
-
               </Stack>
+            </Stack>
             {/* ////////////////////////////////////////// */}
 
             <Stack direction='row-reverse' spacing={2} alignItems='center'>
-            <Button
+              <Button
                 onClick={handleOpenNext3}
                 id='sign-up'
                 className='btn-bg'
@@ -698,16 +689,26 @@ const FloraInfoFormModal = () => {
                 }}>
                 next
               </Button>
-              <Button
-                type='submit'
-                variant='contained'
-                sx={{
-                  textTransform: "capitalize",
-                  boxShadow: 0,
-                  display: nextOpen3 === true ? "flex" : "none",
-                }}>
-                Submit
-              </Button>
+              {loading ? (
+                <LoadingButton
+                  loading
+                  loadingPosition='start'
+                  variant='outlined'>
+                  Save
+                </LoadingButton>
+              ) : (
+                <Button
+                  type='submit'
+                  variant='contained'
+                  sx={{
+                    textTransform: "capitalize",
+                    boxShadow: 0,
+                    display: nextOpen3 === true ? "flex" : "none",
+                  }}>
+                  Submit
+                </Button>
+              )}
+
               <Button
                 onClick={handleOpenNext2}
                 id='sign-up'
@@ -730,11 +731,9 @@ const FloraInfoFormModal = () => {
                   boxShadow: 0,
                   display: nextOpen2 === true ? "flex" : "none",
                 }}>
-                Prev  
+                Prev
               </Button>
-              
-              
-              
+
               <Button
                 onClick={handleOpenNext2}
                 id='sign-up'
@@ -748,7 +747,6 @@ const FloraInfoFormModal = () => {
                 next
               </Button>
             </Stack>
-            
           </Stack>
         </Card>
       </ModalComponent>

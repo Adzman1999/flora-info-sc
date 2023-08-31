@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const createNewFlora = async (
+  setLoading,
   english,
   leafKind,
   floraType,
@@ -61,6 +62,7 @@ export const createNewFlora = async (
   setFruitDescription
 ) => {
   try {
+    setLoading(true);
     const config = {
       headers: {
         "Content-type": "application/json",
@@ -123,12 +125,13 @@ export const createNewFlora = async (
     setLeafImageContainer("");
     setFlowerImageContainer("");
     setFruitImageContainer("");
-    setEnglish("")
-    setLeafKind("")
-    setFloraType("")
-    setLeafDescription("")
-    setFlowerDescription("")
-    setFruitDescription("")
+    setEnglish("");
+    setLeafKind("");
+    setFloraType("");
+    setLeafDescription("");
+    setFlowerDescription("");
+    setFruitDescription("");
+    setLoading(false);
     return data;
   } catch (error) {
     handleSnackbarOpenError();
@@ -137,6 +140,7 @@ export const createNewFlora = async (
 };
 
 export const updateFloraInfo = async (
+  setLoading,
   index,
   english,
   leafKind,
@@ -173,6 +177,7 @@ export const updateFloraInfo = async (
   setFruitImageContainer
 ) => {
   try {
+    setLoading(true);
     const config = {
       headers: {
         "Content-type": "application/json",
@@ -180,14 +185,19 @@ export const updateFloraInfo = async (
     };
     const { data } = await axios.put(
       "/api/flora-info/update",
-      {      
+      {
         id: index._id,
         english: english === "" ? index.english : english,
         leafKind: leafKind === "" ? index.leafKind : leafKind,
         floraType: floraType === "" ? index.floraType : floraType,
-        leafDescription: leafDescription === "" ? index.leafDescription : leafDescription,
-        flowerDescription: flowerDescription === "" ? index.flowerDescription : flowerDescription,
-        fruitDescription: fruitDescription === "" ? index.fruitDescription : fruitDescription,
+        leafDescription:
+          leafDescription === "" ? index.leafDescription : leafDescription,
+        flowerDescription:
+          flowerDescription === ""
+            ? index.flowerDescription
+            : flowerDescription,
+        fruitDescription:
+          fruitDescription === "" ? index.fruitDescription : fruitDescription,
         profileImage: profileImage === null ? index.profileImage : profileImage,
         commonName: commonName === "" ? index.commonName : commonName,
         scientificName:
@@ -217,6 +227,7 @@ export const updateFloraInfo = async (
     setLeafImageContainer(null);
     setFlowerImageContainer(null);
     setFruitImageContainer(null);
+    setLoading(false);
     return data;
   } catch (error) {
     handleSnackbarOpenError();
@@ -224,10 +235,12 @@ export const updateFloraInfo = async (
   }
 };
 
-export const getFloraInfos = async (setSearchResult) => {
+export const getFloraInfos = async (setSearchResult, setLoading) => {
   try {
+    setLoading(true);
     const { data } = await axios.get(`/api/flora-info`);
     setSearchResult(data);
+    setLoading(false);
   } catch (error) {
     alert("error");
   }
@@ -247,12 +260,9 @@ export const searchFloraInfo = async (search, setSearchResult, setLoading) => {
   }
 };
 
-
-export const updateToArchive = async (
-  index,
-  archive
-) => {
+export const updateToArchive = async (index, archive, setLoadingArch) => {
   try {
+    setLoadingArch(true);
     const config = {
       headers: {
         "Content-type": "application/json",
@@ -262,12 +272,13 @@ export const updateToArchive = async (
       "/api/flora-info/archive",
       {
         id: index._id,
-        isArchived: archive
+        isArchived: archive,
       },
       config
     );
+    setLoadingArch(false);
     return data;
   } catch (error) {
-    alert(error.message)
+    alert(error.message);
   }
 };

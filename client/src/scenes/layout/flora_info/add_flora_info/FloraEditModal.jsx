@@ -6,6 +6,7 @@ import {
   Card,
   FormControl,
   IconButton,
+  LoadingButton,
   InputAdornment,
   InputLabel,
   MenuItem,
@@ -19,6 +20,7 @@ import { updateFloraInfo } from "../../../../actions/flora_info/FloraInfoAction"
 
 const FloraEditModal = ({ index }) => {
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -136,6 +138,7 @@ const FloraEditModal = ({ index }) => {
   const handleUpdateFloraInfo = (e) => {
     e.preventDefault();
     updateFloraInfo(
+      setLoading,
       index,
       english,
       leafKind,
@@ -247,15 +250,15 @@ const FloraEditModal = ({ index }) => {
                       ),
                     }}
                   />
-                    <img
-                      src={profileImageContainer || index.profileImage}
-                      alt='pic'
-                      style={{
-                        width: "258px",
-                        height: "150px",
-                        objectFit: "contain",
-                      }}
-                    />
+                  <img
+                    src={profileImageContainer || index.profileImage}
+                    alt='pic'
+                    style={{
+                      width: "258px",
+                      height: "150px",
+                      objectFit: "contain",
+                    }}
+                  />
                 </Stack>
 
                 <Stack spacing={2}>
@@ -272,15 +275,15 @@ const FloraEditModal = ({ index }) => {
                       ),
                     }}
                   />
-                    <img
-                      src={leafImageContainer || index.leafImage}
-                      alt='pic'
-                      style={{
-                        width: "258px",
-                        height: "150px",
-                        objectFit: "contain",
-                      }}
-                    />
+                  <img
+                    src={leafImageContainer || index.leafImage}
+                    alt='pic'
+                    style={{
+                      width: "258px",
+                      height: "150px",
+                      objectFit: "contain",
+                    }}
+                  />
                 </Stack>
               </Stack>
               <Stack spacing={2}>
@@ -387,16 +390,16 @@ const FloraEditModal = ({ index }) => {
                       ),
                     }}
                   />
-                  
-                    <img
-                      src={flowerImageContainer || index.flowerImage}
-                      alt='pic'
-                      style={{
-                        width: "258px",
-                        height: "150px",
-                        objectFit: "contain",
-                      }}
-                    />
+
+                  <img
+                    src={flowerImageContainer || index.flowerImage}
+                    alt='pic'
+                    style={{
+                      width: "258px",
+                      height: "150px",
+                      objectFit: "contain",
+                    }}
+                  />
                 </Stack>
                 <Stack spacing={2}>
                   <TextField
@@ -412,17 +415,16 @@ const FloraEditModal = ({ index }) => {
                       ),
                     }}
                   />
-                  
-                    <img
-                      src={fruitImageContainer || index.fruitImage}
-                      alt='pic'
-                      style={{
-                        width: "258px",
-                        height: "150px",
-                        objectFit: "contain",
-                      }}
-                    />
-                
+
+                  <img
+                    src={fruitImageContainer || index.fruitImage}
+                    alt='pic'
+                    style={{
+                      width: "258px",
+                      height: "150px",
+                      objectFit: "contain",
+                    }}
+                  />
                 </Stack>
               </Stack>
 
@@ -494,91 +496,73 @@ const FloraEditModal = ({ index }) => {
             <Stack
               spacing={2}
               sx={{ display: nextOpen3 === true ? "block" : "none" }}>
-                <TextField
-                  
-                  label='Flora Description'
-                  multiline
-                  fullWidth
-                  rows={1.5}
-                  value={description || index.description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-                <TextField
-                  
-                  label='Leaf Description'
-                  multiline
-                  fullWidth
-                  rows={1.5}
-                  value={leafDescription || index.leafDescription}
-                  onChange={(e) => setLeafDescription(e.target.value)}
-                />
-                <TextField
-                  label='Flower Description'
-                  multiline
-                  fullWidth
-                  rows={1.5}
-                  value={flowerDescription || index.flowerDescription}
-                  onChange={(e) => setFlowerDescription(e.target.value)}
-                />
-                <TextField
-                  label='Fruit Description'
-                  multiline
-                  fullWidth
-                  rows={1.5}
-                  value={fruitDescription || index.fruitDescription}
-                  onChange={(e) => setFruitDescription(e.target.value)}
-                />
-                <Stack spacing={2} direction='row' alignItems='center'>
-                  <FormControl sx={{ width: "100%" }} size='small'>
-                    <InputLabel id='select-host-type'>
-                      FLora Type
-                    </InputLabel>
-                    <Select
-                      
-                      labelId='select-hos-type'
-                      id='select-hos-type'
-                      value={floraType}
-                      label='Hospitalization Plan'
-                      value={floraType || index.floraType}
-                      onChange={(e) => setFloraType(e.target.value)}>
-                      <MenuItem
-                        value='Actinomorphic'>
-                        Actinomorphic
-                      </MenuItem>
-                      <MenuItem
-                        value='Zygomorphic'>
-                        Zygomorphic
-                      </MenuItem>
-                      <MenuItem
-                        value='Asymmetrical'>
-                        Asymmetrical
-                      </MenuItem>
-                    </Select>
-                    </FormControl>
+              <TextField
+                label='Flora Description'
+                multiline
+                fullWidth
+                rows={1.5}
+                value={description || index.description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+              <TextField
+                label='Leaf Description'
+                multiline
+                fullWidth
+                rows={1.5}
+                value={leafDescription || index.leafDescription}
+                onChange={(e) => setLeafDescription(e.target.value)}
+              />
+              <TextField
+                label='Flower Description'
+                multiline
+                fullWidth
+                rows={1.5}
+                value={flowerDescription || index.flowerDescription}
+                onChange={(e) => setFlowerDescription(e.target.value)}
+              />
+              <TextField
+                label='Fruit Description'
+                multiline
+                fullWidth
+                rows={1.5}
+                value={fruitDescription || index.fruitDescription}
+                onChange={(e) => setFruitDescription(e.target.value)}
+              />
+              <Stack spacing={2} direction='row' alignItems='center'>
+                <FormControl sx={{ width: "100%" }} size='small'>
+                  <InputLabel id='select-host-type'>FLora Type</InputLabel>
+                  <Select
+                    labelId='select-hos-type'
+                    id='select-hos-type'
+                    label='Hospitalization Plan'
+                    value={floraType || index.floraType}
+                    onChange={(e) => setFloraType(e.target.value)}>
+                    <MenuItem value='Actinomorphic'>Actinomorphic</MenuItem>
+                    <MenuItem value='Zygomorphic'>Zygomorphic</MenuItem>
+                    <MenuItem value='Asymmetrical'>Asymmetrical</MenuItem>
+                  </Select>
+                </FormControl>
 
-                    <TextField
-                      
-                      size='small'
-                      label='English Name'
-                      fullWidth
-                      value={english || index.english}
-                      onChange={(e) => setEnglish(e.target.value)}
-                    />
-                    <TextField
-                      
-                      size='small'
-                      label='Leaf Kind'
-                      fullWidth
-                      value={leafKind || index.leafKind}
-                      onChange={(e) => setLeafKind(e.target.value)}
-                    />
-                </Stack>
-
+                <TextField
+                  size='small'
+                  label='English Name'
+                  fullWidth
+                  value={english || index.english}
+                  onChange={(e) => setEnglish(e.target.value)}
+                />
+                <TextField
+                  size='small'
+                  label='Leaf Kind'
+                  fullWidth
+                  value={leafKind || index.leafKind}
+                  onChange={(e) => setLeafKind(e.target.value)}
+                />
               </Stack>
+            </Stack>
             {/* ////////////////////////////////////////// */}
 
             <Stack direction='row-reverse' spacing={2} alignItems='center'>
-            <Button
+              <Button
                 onClick={handleOpenNext3}
                 id='sign-up'
                 className='btn-bg'
@@ -590,16 +574,26 @@ const FloraEditModal = ({ index }) => {
                 }}>
                 next
               </Button>
-              <Button
-                type='submit'
-                variant='contained'
-                sx={{
-                  textTransform: "capitalize",
-                  boxShadow: 0,
-                  display: nextOpen3 === true ? "flex" : "none",
-                }}>
-                Submit
-              </Button>
+              {loading ? (
+                <LoadingButton
+                  loading
+                  loadingPosition='start'
+                  variant='outlined'>
+                  Save
+                </LoadingButton>
+              ) : (
+                <Button
+                  type='submit'
+                  variant='contained'
+                  sx={{
+                    textTransform: "capitalize",
+                    boxShadow: 0,
+                    display: nextOpen3 === true ? "flex" : "none",
+                  }}>
+                  Submit
+                </Button>
+              )}
+
               <Button
                 onClick={handleOpenNext2}
                 id='sign-up'
@@ -622,11 +616,9 @@ const FloraEditModal = ({ index }) => {
                   boxShadow: 0,
                   display: nextOpen2 === true ? "flex" : "none",
                 }}>
-                Prev  
+                Prev
               </Button>
-              
-              
-              
+
               <Button
                 onClick={handleOpenNext2}
                 id='sign-up'
