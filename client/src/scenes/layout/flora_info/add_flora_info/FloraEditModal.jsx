@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import SnackbarMessage from "../../../../components/SnackbarMessage";
 import ModalComponent from "../../../../components/ModalComponent";
 import {
+  Box,
+  CircularProgress,
   Button,
   Card,
   FormControl,
   IconButton,
-  LoadingButton,
   InputAdornment,
   InputLabel,
   MenuItem,
@@ -575,12 +576,14 @@ const FloraEditModal = ({ index }) => {
                 next
               </Button>
               {loading ? (
-                <LoadingButton
-                  loading
-                  loadingPosition='start'
-                  variant='outlined'>
-                  Save
-                </LoadingButton>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}>
+                  <CircularProgress sx={{ color: "#009C4C" }} />
+                </Box>
               ) : (
                 <Button
                   type='submit'
