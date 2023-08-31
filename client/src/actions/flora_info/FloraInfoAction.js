@@ -61,8 +61,8 @@ export const createNewFlora = async (
   setFlowerDescription,
   setFruitDescription
 ) => {
+  setLoading(true);
   try {
-    setLoading(true);
     const config = {
       headers: {
         "Content-type": "application/json",
@@ -176,8 +176,8 @@ export const updateFloraInfo = async (
   setFlowerImageContainer,
   setFruitImageContainer
 ) => {
+  setLoading(true);
   try {
-    setLoading(true);
     const config = {
       headers: {
         "Content-type": "application/json",
@@ -236,8 +236,8 @@ export const updateFloraInfo = async (
 };
 
 export const getFloraInfos = async (setSearchResult, setLoading) => {
+  setLoading(true);
   try {
-    setLoading(true);
     const { data } = await axios.get(`/api/flora-info`);
     setSearchResult(data);
     setLoading(false);
@@ -247,8 +247,8 @@ export const getFloraInfos = async (setSearchResult, setLoading) => {
 };
 
 export const searchFloraInfo = async (search, setSearchResult, setLoading) => {
+  setLoading(true);
   try {
-    setLoading(true);
     const { data } = await axios.get(
       `/api/flora-info/keyword?search=${search}`
     );
@@ -261,8 +261,8 @@ export const searchFloraInfo = async (search, setSearchResult, setLoading) => {
 };
 
 export const updateToArchive = async (index, archive, setLoadingArch) => {
+  setLoadingArch(true);
   try {
-    setLoadingArch(true);
     const config = {
       headers: {
         "Content-type": "application/json",
