@@ -1,0 +1,21 @@
+{
+  "name": "flora-info-sc",
+  "version": "1.0.0",
+  "description": "give info of plantation",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd server && npm install && cd ../client && npm install && npm run build",
+    "start": "node server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Adzman1999/flora-info-sc.git"
+  },
+  "author": "Adzman abdulsamad",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Adzman1999/flora-info-sc/issues"
+  },
+  "homepage": "https://github.com/Adzman1999/flora-info-sc#readme"
+}
