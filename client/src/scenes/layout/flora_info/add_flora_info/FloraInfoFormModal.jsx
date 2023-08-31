@@ -689,7 +689,7 @@ const FloraInfoFormModal = () => {
                 }}>
                 next
               </Button>
-              {loading ? (
+              {loading === true ? (
                 <Box
                   sx={{
                     height: "100%",

@@ -38,7 +38,7 @@ const ArchiveRecord = () => {
         sx={{ textAlign: "center", fontWeight: 600, color: "#009C4C" }}>
         Flora Archive
       </Typography>
-      {loading ? (
+      {loading === true ? (
         <Box
           sx={{
             display: "flex",
@@ -62,7 +62,7 @@ const ArchiveRecord = () => {
                     }}
                   />
 
-                  {loadingArch ? (
+                  {loadingArch === true ? (
                     <Box
                       sx={{
                         height: "100%",

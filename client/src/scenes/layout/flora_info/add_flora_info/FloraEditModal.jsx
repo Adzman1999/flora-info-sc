@@ -575,7 +575,7 @@ const FloraEditModal = ({ index }) => {
                 }}>
                 next
               </Button>
-              {loading ? (
+              {loading === true ? (
                 <Box
                   sx={{
                     height: "100%",

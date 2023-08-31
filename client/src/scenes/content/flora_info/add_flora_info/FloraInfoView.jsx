@@ -38,9 +38,11 @@ const FloraInfoView = () => {
         sx={{ textAlign: "center", fontWeight: 600, color: "#009C4C" }}>
         Flora Information
       </Typography>
-      {loading ? (
+      {loading === true ? (
         <Box
           sx={{
+            height: "100%",
+            width: "100%",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -62,7 +64,7 @@ const FloraInfoView = () => {
                     }}
                   />
 
-                  {loadingArch ? (
+                  {loadingArch === true ? (
                     <Box
                       sx={{
                         height: "100%",
