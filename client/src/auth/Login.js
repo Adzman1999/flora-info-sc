@@ -23,11 +23,11 @@ const Login = () => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
-    setOpen(!open);
+    setOpen(true);
   };
 
   const handleClose = () => {
-    setOpen(open);
+    setOpen(false);
   };
 
   const [err, setErr] = useState(null);
@@ -81,21 +81,31 @@ const Login = () => {
           height: "100vh",
         }}>
         <ModalComponent open={open} mdWidth={300}>
-          <Stack direction='row-reverse' sx={{ mt: 2, mr: 2 }}>
+          <Stack direction='row-reverse'>
             <IconButton onClick={handleClose}>
               <CloseRounded />
             </IconButton>
           </Stack>
-          <Typography mt={2} variant='h6' fontWeight={600}>
-            Type this credential for testing purpose
+          <Typography
+            sx={{ color: "#009C4C" }}
+            textAlign='center'
+            mt={2}
+            mb={2}
+            variant='body1'
+            fontWeight={600}>
+            Copy this credential for testing purposes
           </Typography>
-          <Stack flexDirection='column' spacing={2}>
-            <Stack alignItems='center' spacing={1}>
-              <Typography sx={{ fontWeight: 600 }}>Username:</Typography>
+          <Stack spacing={2}>
+            <Stack flexDirection='row' alignItems='center' spacing={1}>
+              <Typography sx={{ fontWeight: 600, color: "#009C4C" }}>
+                Username:
+              </Typography>
               <Typography>admin</Typography>
             </Stack>
-            <Stack alignItems='center' spacing={2}>
-              <Typography sx={{ fontWeight: 600 }}>Password:</Typography>
+            <Stack flexDirection='row' alignItems='center' spacing={2}>
+              <Typography sx={{ fontWeight: 600, color: "#009C4C" }}>
+                Password:
+              </Typography>
               <Typography>admin</Typography>
             </Stack>
           </Stack>
@@ -119,7 +129,7 @@ const Login = () => {
             <Box sx={{ position: "absolute", right: 2, top: 2 }}>
               <Tooltip title='Open to show a given credential'>
                 <IconButton onClick={handleOpen}>
-                  <KeyRounded />
+                  <KeyRounded sx={{ color: "#009C4C" }} />
                 </IconButton>
               </Tooltip>
             </Box>
