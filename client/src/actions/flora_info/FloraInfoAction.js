@@ -61,8 +61,8 @@ export const createNewFlora = async (
   setFlowerDescription,
   setFruitDescription
 ) => {
-  setLoading(true);
   try {
+    setLoading(true);
     const config = {
       headers: {
         "Content-type": "application/json",
@@ -100,41 +100,45 @@ export const createNewFlora = async (
       },
       config
     );
-    handleSnackbarOpenSuccess();
-    setSucceed("Created Successfully!");
-    setProfileImage("");
-    setCommonName("");
-    setScientificName("");
-    setLocalName("");
-    setFamilyName("");
-    setSpeciesName("");
-    setGenus("");
-    setOrder("");
-    setUses("");
-    setClassName("");
-    setKind("");
-    setProvince("");
-    setMunicipality("");
-    setBarangay("");
-    setLeafImage("");
-    setFruitImage("");
-    setFlowerImage("");
-    setDescription("");
-    setPhylum("");
-    setProfileImageContainer("");
-    setLeafImageContainer("");
-    setFlowerImageContainer("");
-    setFruitImageContainer("");
-    setEnglish("");
-    setLeafKind("");
-    setFloraType("");
-    setLeafDescription("");
-    setFlowerDescription("");
-    setFruitDescription("");
-    setLoading(false);
-    return data;
+
+    if (data) {
+      handleSnackbarOpenSuccess();
+      setSucceed("Created Successfully!");
+      setProfileImage("");
+      setCommonName("");
+      setScientificName("");
+      setLocalName("");
+      setFamilyName("");
+      setSpeciesName("");
+      setGenus("");
+      setOrder("");
+      setUses("");
+      setClassName("");
+      setKind("");
+      setProvince("");
+      setMunicipality("");
+      setBarangay("");
+      setLeafImage("");
+      setFruitImage("");
+      setFlowerImage("");
+      setDescription("");
+      setPhylum("");
+      setProfileImageContainer("");
+      setLeafImageContainer("");
+      setFlowerImageContainer("");
+      setFruitImageContainer("");
+      setEnglish("");
+      setLeafKind("");
+      setFloraType("");
+      setLeafDescription("");
+      setFlowerDescription("");
+      setFruitDescription("");
+      setLoading(false);
+      return data;
+    }
   } catch (error) {
     handleSnackbarOpenError();
+    setLoading(false);
     setErr("No Data Created!!");
   }
 };
@@ -176,8 +180,8 @@ export const updateFloraInfo = async (
   setFlowerImageContainer,
   setFruitImageContainer
 ) => {
-  setLoading(true);
   try {
+    setLoading(true);
     const config = {
       headers: {
         "Content-type": "application/json",
@@ -221,14 +225,17 @@ export const updateFloraInfo = async (
       },
       config
     );
-    handleSnackbarOpenSuccess();
-    setSucceed("Flora Info Updated Successfully!");
-    setProfileImageContainer(null);
-    setLeafImageContainer(null);
-    setFlowerImageContainer(null);
-    setFruitImageContainer(null);
-    setLoading(false);
-    return data;
+
+    if (data) {
+      handleSnackbarOpenSuccess();
+      setSucceed("Flora Info Updated Successfully!");
+      setProfileImageContainer(null);
+      setLeafImageContainer(null);
+      setFlowerImageContainer(null);
+      setFruitImageContainer(null);
+      setLoading(false);
+      return data;
+    }
   } catch (error) {
     handleSnackbarOpenError();
     setErr("No Data Created!!");
@@ -236,24 +243,29 @@ export const updateFloraInfo = async (
 };
 
 export const getFloraInfos = async (setSearchResult, setLoading) => {
-  setLoading(true);
   try {
+    setLoading(true);
     const { data } = await axios.get(`/api/flora-info`);
-    setSearchResult(data);
-    setLoading(false);
+    if (data) {
+      setSearchResult(data);
+      setLoading(false);
+    }
   } catch (error) {
     alert("error");
   }
 };
 
 export const searchFloraInfo = async (search, setSearchResult, setLoading) => {
-  setLoading(true);
   try {
+    setLoading(true);
     const { data } = await axios.get(
       `/api/flora-info/keyword?search=${search}`
     );
-    setSearchResult(data);
-    setLoading(false);
+
+    if (data) {
+      setSearchResult(data);
+      setLoading(false);
+    }
   } catch (error) {
     alert("Cannot Fetch API");
     setLoading(false);
@@ -261,8 +273,8 @@ export const searchFloraInfo = async (search, setSearchResult, setLoading) => {
 };
 
 export const updateToArchive = async (index, archive, setLoadingArch) => {
-  setLoadingArch(true);
   try {
+    setLoadingArch(true);
     const config = {
       headers: {
         "Content-type": "application/json",
@@ -276,8 +288,10 @@ export const updateToArchive = async (index, archive, setLoadingArch) => {
       },
       config
     );
-    setLoadingArch(false);
-    return data;
+    if (data) {
+      setLoadingArch(false);
+      return data;
+    }
   } catch (error) {
     alert(error.message);
   }
