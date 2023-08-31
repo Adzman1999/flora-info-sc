@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import SnackbarMessage from "../components/SnackbarMessage";
 import FloraLogo from "../assets/fLORA.png";
 import ModalComponent from "../components/ModalComponent";
-import { KeyRounded, closeRounded } from "@mui/icons-material";
+import { KeyRounded, CloseRounded } from "@mui/icons-material";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -80,14 +80,14 @@ const Login = () => {
           background: "transparent",
           height: "100vh",
         }}>
-        <ModalComponent open={open}>
-          <Stack direction='row-reverse'>
+        <ModalComponent open={open} mdWidth={300}>
+          <Stack direction='row-reverse' sx={{ mt: 2, mr: 2 }}>
             <IconButton onClick={handleClose}>
-              <closeRounded />
+              <CloseRounded />
             </IconButton>
           </Stack>
           <Typography mt={2} variant='h6' fontWeight={600}>
-            Type this credential
+            Type this credential for testing purpose
           </Typography>
           <Stack flexDirection='column' spacing={2}>
             <Stack alignItems='center' spacing={1}>
