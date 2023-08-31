@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
-const RoleUser = require('../auto/RoleUser')
+const RoleUser = require("../auto/RoleUser");
 
 const connectDB = async () => {
   try {
     mongoose
-      .connect(process.env.DB_URL, {
+      .connect(process.env.MONGODB_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       })
