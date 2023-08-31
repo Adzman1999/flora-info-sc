@@ -1,14 +1,34 @@
 import React, { Fragment, useState } from "react";
-import { Button, Card, Stack, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  Card,
+  Stack,
+  TextField,
+  Typography,
+  Box,
+  Tooltip,
+  IconButton,
+} from "@mui/material";
 import { login } from "../actions/UserAction";
 import { useNavigate } from "react-router-dom";
 import SnackbarMessage from "../components/SnackbarMessage";
 import FloraLogo from "../assets/fLORA.png";
+import ModalComponent from "../components/ModalComponent";
+import { KeyRounded } from "@mui/icons-material";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(!open);
+  };
+
+  const handleClose = () => {
+    setOpen(open);
+  };
 
   const [err, setErr] = useState(null);
   const [succeed, setSucceed] = useState(null);
@@ -60,12 +80,36 @@ const Login = () => {
           background: "transparent",
           height: "100vh",
         }}>
+        <Box sx={{ position: "absolute", right: 2, top: 2 }}>
+          <Tooltip title='Open to show a given credential'>
+            <IconButton onClick={handleOpen}>
+              <KeyRounded />
+            </IconButton>
+          </Tooltip>
+        </Box>
+
+        <ModalComponent open={open} mdWidth={100}>
+          <Typography mt={2} variant='h6' fontWeight={600}>
+            Type this credential
+          </Typography>
+          <Stack flexDirection='column' spacing={2}>
+            <Stack alignItems='center' spacing={1}>
+              <Typography sx={{ fontWeight: 600 }}>Username:</Typography>
+              <Typography>admin</Typography>
+            </Stack>
+            <Stack alignItems='center' spacing={2}>
+              <Typography sx={{ fontWeight: 600 }}>Password:</Typography>
+              <Typography>admin</Typography>
+            </Stack>
+          </Stack>
+        </ModalComponent>
+
         <Card
           component='form'
           onSubmit={loginSubmit}
           sx={{
+            position: "relative",
             width: { xs: "100%", md: 500 },
-            boxShadow: 0,
             background: "transparent",
           }}>
           <Card
@@ -93,11 +137,9 @@ const Login = () => {
                 name='username'
                 id='username'
                 autoComplete='username'
-                value='admin'
                 onChange={(e) => setUsername(e.target.value)}
               />
               <TextField
-                value='admin'
                 required
                 label='Password'
                 type='password'
