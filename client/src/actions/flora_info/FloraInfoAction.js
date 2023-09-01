@@ -264,7 +264,6 @@ export const searchFloraInfo = async (search, setSearchResult) => {
     }
   } catch (error) {
     alert("Cannot Fetch API");
-    setLoading(false);
   }
 };
 
