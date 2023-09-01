@@ -242,29 +242,25 @@ export const updateFloraInfo = async (
   }
 };
 
-export const getFloraInfos = async (setSearchResult, setLoading) => {
+export const getFloraInfos = async (setSearchResult) => {
   try {
-    setLoading(true);
     const { data } = await axios.get(`/api/flora-info`);
     if (data) {
       setSearchResult(data);
-      setLoading(false);
     }
   } catch (error) {
     alert("error");
   }
 };
 
-export const searchFloraInfo = async (search, setSearchResult, setLoading) => {
+export const searchFloraInfo = async (search, setSearchResult) => {
   try {
-    setLoading(true);
     const { data } = await axios.get(
       `/api/flora-info/keyword?search=${search}`
     );
 
     if (data) {
       setSearchResult(data);
-      setLoading(false);
     }
   } catch (error) {
     alert("Cannot Fetch API");
